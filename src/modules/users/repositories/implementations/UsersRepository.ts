@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { User } from "../../model/User";
 import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
 
@@ -48,7 +46,15 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const updatedUser = {
+      ...receivedUser,
+      admin: true,
+      updated_at: new Date(),
+    };
+
+    const index = this.users.findIndex((user) => user.id === updatedUser.id);
+    this.users[index] = updatedUser;
+    return updatedUser;
   }
 
   list(): User[] {
