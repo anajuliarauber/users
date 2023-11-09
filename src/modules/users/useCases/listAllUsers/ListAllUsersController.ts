@@ -7,7 +7,10 @@ class ListAllUsersController {
 
   handle(request: Request, response: Response): Response {
     const { user_id } = request.headers;
-    const users = this.listAllUsersUseCase.execute({ user_id });
+
+    const users = this.listAllUsersUseCase.execute({
+      user_id: user_id as string,
+    });
 
     return response.json(users);
   }
