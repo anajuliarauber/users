@@ -1,5 +1,6 @@
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { UserNotAllowed } from "../Errors";
 
 interface IRequest {
   user_id: string;
@@ -11,8 +12,8 @@ class ListAllUsersUseCase {
   execute({ user_id }: IRequest): User[] {
     const user = this.usersRepository.findById(user_id);
 
-    if (!user.admin) {
-      throw new Error("Not allowed");
+    if (!user || !user.admin) {
+      throw new UserNotAllowed();
     }
 
     return this.usersRepository.list();
