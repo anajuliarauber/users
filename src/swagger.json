@@ -198,6 +198,66 @@
           }
         }
       }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user by Id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "admin": { "type": "boolean" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "created_at": { "type": "string" },
+                    "updated_at": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "id": "fbe87a29-1c49-4611-8be7-abfd5bebdfe4",
+                  "admin": true,
+                  "name": "Ana",
+                  "email": "anaju@gmail.com",
+                  "created_at": "2023-11-20T23:03:05.833Z",
+                  "updated_at": "2023-11-20T23:03:23.350Z"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "error": "User not found"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
